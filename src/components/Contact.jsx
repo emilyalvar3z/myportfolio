@@ -164,7 +164,7 @@ export default function Contact({ language }) {
     <section id="contact" className="py-24 bg-[#2A3072] text-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-        //contact left side
+        
         <div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">{t.getInTouch}</h2>
           <p className="text-blue-100 mb-10 max-w-xl">{t.intro}</p>
@@ -175,18 +175,18 @@ export default function Contact({ language }) {
           <Info label={t.hours} value={t.hoursValue} />
         </div>
 
-        // actual form
+    
         <div className="bg-white text-gray-900 rounded-2xl p-10 shadow-xl">
           <h3 className="text-3xl font-bold mb-4">{t.requestQuote}</h3>
           <p className="text-gray-600 mb-6">{t.formIntro}</p>
 
-          / if submitted correctly
+ 
           {submitted && (
             <div className="mb-6 bg-green-50 border border-green-200 p-4 rounded-lg">
               <p className="text-green-700 font-semibold">{t.success}</p>
             </div>
           )}
-          // if NOT submitted correctly
+       
           {error && (
             <div className="mb-6 bg-red-50 border border-red-200 p-4 rounded-lg">
               <p className="text-red-700 font-semibold">{t.error}</p>

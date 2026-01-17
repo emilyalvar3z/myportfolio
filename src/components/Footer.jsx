@@ -50,7 +50,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COMPANY */}
+          // branding
           <div>
             <h4 className="text-lg font-semibold mb-4">
               Company
@@ -74,7 +74,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* SOCIAL */}
+          // fb and insta
           <div>
             <h4 className="text-lg font-semibold mb-4">
               Follow Us

@@ -19,7 +19,7 @@ const text = {
       "Mount Kisco",
     ],
   },
-
+  //translate text
   es: {
     title: "Verifique Nuestra Área de Servicio",
     subtitle:
@@ -44,7 +44,7 @@ export default function About({ language }) {
   return (
     <section id="about" className="relative py-24">
 
-      {/* BACKGROUND MAP */}
+      //insert map ss
       <img
         src="/map.png"
         alt="Service area map"
@@ -52,7 +52,7 @@ export default function About({ language }) {
         draggable="false"
       />
 
-      {/* CONTENT */}
+      //box thingy
       <div className="relative z-10 max-w-4xl mx-auto px-6">
         <div className="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-10 md:p-14 text-center">
 
@@ -84,8 +84,6 @@ export default function About({ language }) {
     </section>
   );
 }
-
-/* ---------- ZIP CHECKER ---------- */
 
 function ZipChecker({ language }) {
   const serviceZips = [

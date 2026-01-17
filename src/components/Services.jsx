@@ -3,7 +3,7 @@ const text = {
     title: "Our Services",
     subtitle:
       "From regular maintenance to deep cleaning, we offer comprehensive solutions for all your cleaning needs.",
-    learnMore: "Learn more →",
+    learnMore: "View more →",
     services: [
       {
         title: "Residential Cleaning",

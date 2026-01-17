@@ -17,6 +17,8 @@ const text = {
     formIntro:
       "Help us get to know your space. A few details allow us to provide the closest and most accurate estimate for your cleaning needs.",
 
+    name: "Full Name",
+    phoneInput: "Phone Number",
     cleaningType: "Type of Cleaning",
     bedrooms: "Bedrooms",
     bathrooms: "Bathrooms",
@@ -25,6 +27,11 @@ const text = {
     extras: "Optional Extras",
     notes: "Additional Notes",
     submit: "Send Request",
+
+    success:
+      "Thank you for your interest! We’ve received your request and will get back to you as soon as possible.",
+    error:
+      "Something went wrong. Please try again or contact us directly.",
 
     options: {
       cleaning: [
@@ -61,6 +68,8 @@ const text = {
     formIntro:
       "Ayúdanos a conocer tu espacio. Algunos detalles nos permiten brindarte una estimación más precisa.",
 
+    name: "Nombre Completo",
+    phoneInput: "Número de Teléfono",
     cleaningType: "Tipo de Limpieza",
     bedrooms: "Habitaciones",
     bathrooms: "Baños",
@@ -69,6 +78,11 @@ const text = {
     extras: "Extras Opcionales",
     notes: "Notas Adicionales",
     submit: "Enviar Solicitud",
+
+    success:
+      "¡Gracias por tu interés! Hemos recibido tu solicitud y nos comunicaremos contigo lo antes posible.",
+    error:
+      "Algo salió mal. Inténtalo nuevamente o contáctanos directamente.",
 
     options: {
       cleaning: [
@@ -97,7 +111,12 @@ const text = {
 export default function Contact({ language }) {
   const t = text[language];
 
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+
   const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
     cleaningType: "",
     bedrooms: "",
     bathrooms: "",
@@ -119,6 +138,28 @@ export default function Contact({ language }) {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(false);
+    setError(false);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mwvvvnwj", {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-[#2A3072] text-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -137,38 +178,58 @@ export default function Contact({ language }) {
         {/* FORM */}
         <div className="bg-white text-gray-900 rounded-2xl p-10 shadow-xl">
           <h3 className="text-3xl font-bold mb-4">{t.requestQuote}</h3>
-          <p className="text-gray-600 mb-8">{t.formIntro}</p>
+          <p className="text-gray-600 mb-6">{t.formIntro}</p>
 
-          <form className="space-y-6">
-            <Select label={t.cleaningType} options={t.options.cleaning} />
-            <Select label={t.bedrooms} options={t.options.bedrooms} />
-            <Select label={t.bathrooms} options={t.options.bathrooms} />
-            <Select label={t.propertyType} options={t.options.property} />
-
-            <Input label={t.zip} placeholder="e.g. 10562" />
-
-            <div>
-              <p className="font-medium mb-2">{t.extras}</p>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                {t.options.extras.map((extra) => (
-                  <label key={extra} className="flex gap-2">
-                    <input type="checkbox" onChange={() => toggleExtra(extra)} />
-                    {extra}
-                  </label>
-                ))}
-              </div>
+          {/* SUCCESS / ERROR MESSAGE */}
+          {submitted && (
+            <div className="mb-6 bg-green-50 border border-green-200 p-4 rounded-lg">
+              <p className="text-green-700 font-semibold">{t.success}</p>
             </div>
+          )}
 
-            <textarea
-              rows="4"
-              placeholder={t.notes}
-              className="w-full border rounded-lg px-4 py-3"
-            />
+          {error && (
+            <div className="mb-6 bg-red-50 border border-red-200 p-4 rounded-lg">
+              <p className="text-red-700 font-semibold">{t.error}</p>
+            </div>
+          )}
 
-            <button className="w-full bg-yellow-400 text-[#2A3072] font-bold py-4 rounded-lg">
-              {t.submit}
-            </button>
-          </form>
+          {!submitted && (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <Input label={t.name} name="name" value={formData.name} onChange={handleChange} required />
+              <Input label={t.phoneInput} name="phone" value={formData.phone} onChange={handleChange} required />
+
+              <Select label={t.cleaningType} name="cleaningType" value={formData.cleaningType} onChange={handleChange} options={t.options.cleaning} />
+              <Select label={t.bedrooms} name="bedrooms" value={formData.bedrooms} onChange={handleChange} options={t.options.bedrooms} />
+              <Select label={t.bathrooms} name="bathrooms" value={formData.bathrooms} onChange={handleChange} options={t.options.bathrooms} />
+              <Select label={t.propertyType} name="propertyType" value={formData.propertyType} onChange={handleChange} options={t.options.property} />
+
+              <Input label={t.zip} name="zipCode" value={formData.zipCode} onChange={handleChange} required />
+
+              <div>
+                <p className="font-medium mb-2">{t.extras}</p>
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  {t.options.extras.map((extra) => (
+                    <label key={extra} className="flex gap-2">
+                      <input type="checkbox" onChange={() => toggleExtra(extra)} />
+                      {extra}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <textarea
+                name="notes"
+                rows="4"
+                placeholder={t.notes}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-3"
+              />
+
+              <button className="w-full bg-yellow-400 text-[#2A3072] font-bold py-4 rounded-lg">
+                {t.submit}
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>
@@ -190,23 +251,29 @@ function Info({ label, value, href }) {
   );
 }
 
-function Select({ label, options }) {
+function Select({ label, name, value, onChange, options }) {
   return (
     <div>
       <label className="block font-medium mb-1">{label}</label>
-      <select className="w-full border rounded-lg px-4 py-3">
-        <option>Select an option</option>
-        {options.map((o) => <option key={o}>{o}</option>)}
+      <select name={name} value={value} onChange={onChange} className="w-full border rounded-lg px-4 py-3">
+        <option value="">Select an option</option>
+        {options.map((o) => <option key={o} value={o}>{o}</option>)}
       </select>
     </div>
   );
 }
 
-function Input({ label, placeholder }) {
+function Input({ label, name, value, onChange, required }) {
   return (
     <div>
       <label className="block font-medium mb-1">{label}</label>
-      <input className="w-full border rounded-lg px-4 py-3" placeholder={placeholder} />
+      <input
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        className="w-full border rounded-lg px-4 py-3"
+      />
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* SERVICES */}
+          
           <div>
             <h4 className="text-lg font-semibold mb-4">
               Services
@@ -50,7 +50,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          // branding
+          
           <div>
             <h4 className="text-lg font-semibold mb-4">
               Company
@@ -74,7 +74,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          // fb and insta
+          
           <div>
             <h4 className="text-lg font-semibold mb-4">
               Follow Us

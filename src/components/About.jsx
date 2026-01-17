@@ -85,6 +85,8 @@ export default function About({ language }) {
   );
 }
 
+/* ---------- ZIP CHECKER ---------- */
+
 function ZipChecker({ language }) {
   const serviceZips = [
     "10562",

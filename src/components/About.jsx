@@ -46,7 +46,7 @@ export default function About({ language }) {
 
   
       <img
-        src="/map.png"
+        src={`${import.meta.env.BASE_URL}map.png`}
         alt="Service area map"
         className="absolute inset-0 w-full h-full object-cover opacity-40"
         draggable="false"

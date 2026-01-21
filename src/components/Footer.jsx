@@ -7,7 +7,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/logo.png"
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="HP House Cleaning Logo"
                 className="w-20 h-10 object-contain"
               />

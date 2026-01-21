@@ -22,7 +22,7 @@ export default function Header({ language, setLanguage }) {
         {/* LEFT — LOGO + NAME */}
         <div className="flex items-center gap-3">
           <img
-            src="/blr.png"
+            src={`${import.meta.env.BASE_URL}blr.png`}
             alt="HP House Cleaning Logo"
             className="h-14 w-auto object-contain"
             draggable="false"

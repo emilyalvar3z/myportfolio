@@ -1,10 +1,27 @@
-export default function Hero() {
+const text = {
+  en: {
+    title: "HP House Cleaning",
+    subtitle:
+      "Reliable, detailed cleaning services for homes and offices across Westchester County.",
+    primaryBtn: "Get a Free Quote",
+    secondaryBtn: "Our Services",
+  },
+  es: {
+    title: "HP House Cleaning",
+    subtitle:
+      "Servicios de limpieza confiables y detallados para hogares y oficinas en el condado de Westchester.",
+    primaryBtn: "Obtén una Cotización Gratis",
+    secondaryBtn: "Nuestros Servicios",
+  },
+};
+
+export default function Hero({ language }) {
   return (
     <section className="hero relative h-screen w-full overflow-hidden flex items-center justify-center">
 
       {/* BACKGROUND IMAGE */}
       <img
-        src="/hero.png"
+        src={`${import.meta.env.BASE_URL}hero.png`}
         alt="Professional cleaning service"
         className="absolute inset-0 w-full h-full object-cover"
       />
@@ -32,7 +49,7 @@ export default function Hero() {
 
         {/* LOGO */}
         <img
-          src="logo.png"
+          src={`${import.meta.env.BASE_URL}logo.png`}
           alt="HP House Cleaning Logo"
           className="mx-auto mb-6 w-48 md:w-56"
           draggable="false"
@@ -40,13 +57,12 @@ export default function Hero() {
 
         {/* TITLE */}
         <h1 className="text-white text-4xl md:text-6xl font-extrabold mb-6">
-          HP House Cleaning
+          {text[language].title}
         </h1>
 
         {/* SUBTITLE */}
         <p className="text-blue-100 text-lg md:text-xl mb-10">
-          Reliable, detailed cleaning services for homes and offices across
-          Westchester County.
+          {text[language].subtitle}
         </p>
 
         {/* BUTTONS */}
@@ -55,14 +71,14 @@ export default function Hero() {
             href="#contact"
             className="bg-yellow-400 text-[#2A3072] font-semibold px-8 py-4 rounded-lg hover:bg-yellow-300 transition"
           >
-            Get a Free Quote
+            {text[language].primaryBtn}
           </a>
 
           <a
             href="#services"
             className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition"
           >
-            Our Services
+            {text[language].secondaryBtn}
           </a>
         </div>
       </div>

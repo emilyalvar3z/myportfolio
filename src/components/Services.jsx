@@ -84,7 +84,7 @@ export default function Services({ language }) {
                          transition-all duration-300"
             >
               <img
-                src={`/service${index + 1}.png`}
+                src={`${import.meta.env.BASE_URL}service${index + 1}.png`}
                 alt={service.title}
                 className="w-full h-48 object-cover"
                 draggable="false"

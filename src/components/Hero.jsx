@@ -32,7 +32,7 @@ export default function Hero() {
 
         {/* LOGO */}
         <img
-          src="/logo.png"
+          src="logo.png"
           alt="HP House Cleaning Logo"
           className="mx-auto mb-6 w-48 md:w-56"
           draggable="false"
